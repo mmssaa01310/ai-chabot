@@ -26,6 +26,18 @@
     "failed": "Failed to create account!",
     "success": "Account created successfully!"
   },
+  "reference-prompts": {
+    "prompt1": "Tell me the cause of this equipment trouble",
+    "prompt2": "Explain the maintenance procedure in detail",
+    "prompt3": "Show me examples of similar troubles",
+    "title": "Reference Prompts",
+    "addPlaceholder": "Add a new prompt",
+    "addButton": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
   "messageEditor": {
     "cancel": "Cancel",
     "send": "Send",

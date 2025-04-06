@@ -26,6 +26,18 @@
     "failed": "アカウントの作成に失敗しました！",
     "success": "アカウントを作成しました！"
   },
+  "reference-prompts": {
+    "prompt1": "この装置のトラブル原因を教えて",
+    "prompt2": "保全対応手順を詳しく教えて",
+    "prompt3": "類似トラブルの事例を見せて",
+    "title": "参考プロンプト",
+    "addPlaceholder": "新しいプロンプトを追加",
+    "addButton": "追加",
+    "edit": "編集",
+    "delete": "削除",
+    "save": "保存",
+    "cancel": "キャンセル"
+  },
   "messageEditor": {
     "cancel": "キャンセル",
     "send": "送信",

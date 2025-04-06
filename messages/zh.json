@@ -69,6 +69,18 @@
       "description": "来自 Amazon Bedrock 平台的对话模型"
     }
   },
+  "reference-prompts": {
+    "prompt1": "请告诉我这个设备故障的原因",
+    "prompt2": "请详细说明维修步骤",
+    "prompt3": "请展示类似故障的案例",
+    "title": "参考提示",
+    "addPlaceholder": "添加新的提示",
+    "addButton": "添加",
+    "edit": "编辑",
+    "delete": "删除",
+    "save": "保存",
+    "cancel": "取消"
+  },
   "visibilitySelector": {
     "title": "可见性",
     "placeholder": "选择可见性...",

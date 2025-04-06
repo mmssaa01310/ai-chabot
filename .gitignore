@@ -16,6 +16,7 @@ build
 # misc
 .DS_Store
 *.pem
+.pnpm-store/
 
 # debug
 npm-debug.log*
@@ -43,3 +44,18 @@ yarn-error.log*
 /playwright-report/
 /blob-report/
 /playwright/*
+
+# database
+pgadmin_data/
+
+
+# Ignore large files over 100MB
+
+# Ignore pnpm store cache
+.pnpm-store/
+
+# Ignore misgenerated Windows path format (just in case)
+D:.pnpm-storev3/
+
+# Ignore specific large node_modules binaries
+node_modules/

@@ -24,6 +24,8 @@ import { SuggestedActions } from './suggested-actions';
 import equal from 'fast-deep-equal';
 import { UseChatHelpers } from '@ai-sdk/react';
 
+import { ReferencePrompts } from './reference-prompts';
+
 function PureMultimodalInput({
   chatId,
   input,
@@ -248,7 +250,19 @@ function PureMultimodalInput({
         }}
       />
 
-      <div className="absolute bottom-0 p-2 w-fit flex flex-row justify-start">
+      {/* <div className="absolute bottom-0 p-2 w-fit flex flex-row justify-start">
+        <AttachmentsButton fileInputRef={fileInputRef} status={status} />
+      </div> */}
+
+      <div className="absolute bottom-0 p-2 w-fit flex flex-row justify-start gap-2">
+        {/* 参考プロンプトボタン追加 */}
+        <ReferencePrompts
+          onSelect={(text) => {
+            setInput(text);
+            textareaRef.current?.focus();
+            adjustHeight();
+          }}
+        />
         <AttachmentsButton fileInputRef={fileInputRef} status={status} />
       </div>
 
