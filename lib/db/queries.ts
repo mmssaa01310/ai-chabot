@@ -376,3 +376,22 @@ export async function createChat(userId: string) {
     throw error;
   }
 }
+
+// タイトル変更
+export async function updateChatTitle({
+  id,
+  title,
+}: {
+  id: string;
+  title: string;
+}) {
+  try {
+    return await db
+      .update(chat)
+      .set({ title })
+      .where(eq(chat.id, id));
+  } catch (error) {
+    console.error('Failed to update chat title in database', error);
+    throw error;
+  }
+}

@@ -25,6 +25,8 @@ import { requestSuggestions } from '@/lib/ai/tools/request-suggestions';
 import { getWeather } from '@/lib/ai/tools/get-weather';
 import { isProductionEnvironment } from '@/lib/constants';
 import { myProvider } from '@/lib/ai/providers';
+import { NextResponse } from 'next/server';
+import { updateChatTitle } from '@/lib/db/queries';
 
 
 export const maxDuration = 60;
@@ -206,8 +208,57 @@ export async function DELETE(request: Request) {
 }
 
 //追加部分
-import { NextResponse } from 'next/server';
+
 export async function GET() {
   const id = generateUUID();
   return NextResponse.json({ id });
+}
+
+
+// PATCH: チャットタイトルを更新するエンドポイント
+// URL例: /api/chat?id=chat-id-123
+// 期待されるリクエストボディ: { "title": "新しいタイトル" }
+
+export async function PATCH(request: Request) {
+  // クエリパラメータからチャットIDを取得
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get('id');
+
+  if (!id) {
+    return new Response('Missing chat ID', { status: 400 });
+  }
+
+  // ユーザー認証（ログインしているか確認）
+  const session = await auth();
+
+  if (!session || !session.user) {
+    return new Response('Unauthorized', { status: 401 });
+  }
+
+  // リクエストボディから新しいタイトルを取得
+  const { title } = await request.json();
+
+  if (typeof title !== 'string' || title.trim() === '') {
+    return new Response('Invalid title', { status: 400 });
+  }
+
+  // 指定されたチャットが現在のユーザーのものであるか確認
+  const chat = await getChatById({ id });
+
+  if (!chat || chat.userId !== session.user.id) {
+    return new Response('Unauthorized', { status: 401 });
+  }
+
+  try {
+    // チャットのタイトルを保存（更新処理）
+    await updateChatTitle({
+      id,
+      title: title.trim(),
+    });
+
+    return new Response(null, { status: 204 }); // 成功（内容なし）
+  } catch (error) {
+    console.error('Failed to update chat title', error);
+    return new Response('Failed to update title', { status: 500 });
+  }
 }
