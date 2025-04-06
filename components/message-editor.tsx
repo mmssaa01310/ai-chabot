@@ -6,6 +6,7 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { Textarea } from './ui/textarea';
 import { deleteTrailingMessages } from '@/app/(chat)/actions';
 import { UseChatHelpers } from '@ai-sdk/react';
+import { useTranslations } from 'next-intl'; // ← 追加
 
 export type MessageEditorProps = {
   message: Message;
@@ -20,6 +21,7 @@ export function MessageEditor({
   setMessages,
   reload,
 }: MessageEditorProps) {
+  const t = useTranslations('messageEditor'); // ← 翻訳キーの namespace を指定
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const [draftContent, setDraftContent] = useState<string>(message.content);
@@ -61,7 +63,7 @@ export function MessageEditor({
             setMode('view');
           }}
         >
-          Cancel
+          {t('cancel')}
         </Button>
         <Button
           data-testid="message-editor-send-button"
@@ -71,9 +73,7 @@ export function MessageEditor({
           onClick={async () => {
             setIsSubmitting(true);
 
-            await deleteTrailingMessages({
-              id: message.id,
-            });
+            await deleteTrailingMessages({ id: message.id });
 
             // @ts-expect-error todo: support UIMessage in setMessages
             setMessages((messages) => {
@@ -96,7 +96,7 @@ export function MessageEditor({
             reload();
           }}
         >
-          {isSubmitting ? 'Sending...' : 'Send'}
+          {isSubmitting ? t('sending') : t('send')}
         </Button>
       </div>
     </div>

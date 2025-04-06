@@ -1,0 +1,102 @@
+{
+  "header": {
+    "newChat": "New Chat",
+    "selectModel": "Select Model",
+    "visibility": "Visibility"
+  },
+  "sidebar": {
+    "title": "Chatbot",
+    "newChat": "New Chat"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signInDescription": "Use your email and password to sign in",
+    "signUp": "Sign Up",
+    "signUpDescription": "Create an account with your email and password",
+    "noAccount": "Don't have an account?",
+    "forFree": "Sign up for free.",
+    "email": "Email",
+    "emailPlaceholder": "user@example.com",
+    "password": "Password",
+    "alreadyHaveAccount": "Already have an account?",
+    "instead": "Sign in instead.",
+    "userExists": "Account already exists!",
+    "invalidCredentials": "Invalid credentials!",
+    "invalidData": "Failed validating your submission!",
+    "failed": "Failed to create account!",
+    "success": "Account created successfully!"
+  },
+  "messageEditor": {
+    "cancel": "Cancel",
+    "send": "Send",
+    "sending": "Sending..."
+  },
+  "chat": {
+    "title": "Chat Title",
+    "welcomeMessage": "Welcome to the chat!"
+  },
+  "modelSelector": {
+    "title": "Select Model",
+    "placeholder": "Select a model...",
+    "chatModels": "Chat Models",
+    "completionModels": "Completion Models",
+    "chat-model": {
+      "name": "Chat Model",
+      "description": "Model optimized for conversation"
+    },
+    "chat-model-reasoning": {
+      "name": "Reasoning Chat Model",
+      "description": "A model optimized for complex reasoning and logic"
+    },
+    "gpt-3-5-turbo": {
+      "name": "GPT-3.5 Turbo",
+      "description": "Fast and cost-effective OpenAI model"
+    },
+    "gpt-4": {
+      "name": "GPT-4",
+      "description": "Advanced OpenAI model with higher accuracy"
+    },
+    "deepseek-chat": {
+      "name": "DeepSeek Chat",
+      "description": "Powerful open-source model for reasoning"
+    },
+    "claude-3-opus": {
+      "name": "Claude 3.5 (Opus)",
+      "description": "Anthropic's flagship model for reliable and nuanced responses"
+    },
+    "amazon-nova": {
+      "name": "Amazon Titan Nova",
+      "description": "Amazon’s conversational model from Bedrock platform"
+    }
+  },
+  "overview": {
+    "title": "This is EmMa, an AI Maintenance ChatBot.",
+    "description": "Based on past cases, EmMa answers your questions about maintenance and how to deal with troubles."
+  },
+  "sidebar": {
+    "show": "Show Sidebar",
+    "hide": "Hide Sidebar"
+  },
+  "suggested": {
+    "item_1": {
+      "title": "What is AI maintenance?",
+      "label": "Its basics and applications",
+      "action": "What is AI-based maintenance and how can it be used effectively?"
+    },
+    "item_2": {
+      "title": "Anomaly detection system",
+      "label": "How does it work?",
+      "action": "How does anomaly detection work in AI-based systems?"
+    },
+    "item_3": {
+      "title": "Case-based troubleshooting",
+      "label": "Learn from past examples",
+      "action": "Can you provide past examples of troubleshooting in maintenance operations?"
+    },
+    "item_4": {
+      "title": "Troubleshooting procedure",
+      "label": "On-site response steps",
+      "action": "What are the appropriate steps to take when a problem occurs in a factory setting?"
+    }
+  }
+}

@@ -1,17 +1,17 @@
-import { put } from '@vercel/blob';
+import { writeFile } from 'fs/promises';
+import path from 'path';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-
+import { nanoid } from 'nanoid';
 import { auth } from '@/app/(auth)/auth';
 
-// Use Blob instead of File since File is not available in Node.js environment
+// ファイルのバリデーションスキーマ（20MB & JPEG/PNG）
 const FileSchema = z.object({
   file: z
     .instanceof(Blob)
-    .refine((file) => file.size <= 5 * 1024 * 1024, {
-      message: 'File size should be less than 5MB',
+    .refine((file) => file.size <= 20 * 1024 * 1024, {
+      message: 'File size should be less than 20MB',
     })
-    // Update the file type based on the kind of files you want to accept
     .refine((file) => ['image/jpeg', 'image/png'].includes(file.type), {
       message: 'File type should be JPEG or PNG',
     }),
@@ -24,15 +24,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  if (request.body === null) {
-    return new Response('Request body is empty', { status: 400 });
+  if (!request.body) {
+    return NextResponse.json(
+      { error: 'Request body is empty' },
+      { status: 400 },
+    );
   }
 
   try {
     const formData = await request.formData();
-    const file = formData.get('file') as Blob;
+    const file = formData.get('file') as File;
 
-    if (!file) {
+    if (!file || typeof file === 'string') {
       return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
     }
 
@@ -42,24 +45,33 @@ export async function POST(request: Request) {
       const errorMessage = validatedFile.error.errors
         .map((error) => error.message)
         .join(', ');
-
       return NextResponse.json({ error: errorMessage }, { status: 400 });
     }
 
-    // Get filename from formData since Blob doesn't have name property
-    const filename = (formData.get('file') as File).name;
-    const fileBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(await file.arrayBuffer());
+
+    const ext = path.extname(file.name); // 拡張子を維持
+    const uniqueFilename = `${nanoid()}${ext}`; // ユニークなファイル名を生成
+
+    const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+    const filePath = path.join(uploadDir, uniqueFilename);
 
     try {
-      const data = await put(`${filename}`, fileBuffer, {
-        access: 'public',
+      await writeFile(filePath, buffer);
+      return NextResponse.json({
+        url: `/uploads/${uniqueFilename}`,
+        name: uniqueFilename,
+        contentType: file.type,
       });
-
-      return NextResponse.json(data);
-    } catch (error) {
-      return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
+    } catch (err) {
+      console.error('❌ Failed to save file:', err);
+      return NextResponse.json(
+        { error: 'Failed to save file' },
+        { status: 500 },
+      );
     }
   } catch (error) {
+    console.error('❌ Unexpected error:', error);
     return NextResponse.json(
       { error: 'Failed to process request' },
       { status: 500 },

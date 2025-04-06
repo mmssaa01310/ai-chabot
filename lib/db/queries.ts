@@ -1,9 +1,12 @@
 import 'server-only';
 
+import { randomUUID } from 'crypto';
+
 import { genSaltSync, hashSync } from 'bcrypt-ts';
 import { and, asc, desc, eq, gt, gte, inArray } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
+
 
 import {
   user,
@@ -346,6 +349,30 @@ export async function updateChatVisiblityById({
     return await db.update(chat).set({ visibility }).where(eq(chat.id, chatId));
   } catch (error) {
     console.error('Failed to update chat visibility in database');
+    throw error;
+  }
+}
+
+//追加部分
+export async function createChat(userId: string) {
+  const id = randomUUID(); // ← 自動的にUUID生成
+  const createdAt = new Date();
+
+  try {
+    const [chatRow] = await db
+      .insert(chat)
+      .values({
+        id,
+        userId,
+        title: '新しいチャット',
+        visibility: 'private',
+        createdAt,
+      })
+      .returning({ id: chat.id }); // ← 保存されたチャットのIDを取得
+
+    return chatRow; // { id: ... }
+  } catch (error) {
+    console.error('Failed to create chat in database', error);
     throw error;
   }
 }

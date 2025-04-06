@@ -1,5 +1,5 @@
+import type { UIMessage } from 'ai';
 import {
-  UIMessage,
   appendResponseMessages,
   createDataStreamResponse,
   smoothStream,
@@ -26,6 +26,7 @@ import { getWeather } from '@/lib/ai/tools/get-weather';
 import { isProductionEnvironment } from '@/lib/constants';
 import { myProvider } from '@/lib/ai/providers';
 
+
 export const maxDuration = 60;
 
 export async function POST(request: Request) {
@@ -40,10 +41,17 @@ export async function POST(request: Request) {
       selectedChatModel: string;
     } = await request.json();
 
-    const session = await auth();
+    console.log('messages', messages);
 
-    if (!session || !session.user || !session.user.id) {
-      return new Response('Unauthorized', { status: 401 });
+    let session = await auth();
+
+    // if (!session || !session.user || !session.user.id) {
+    //   return new Response('Unauthorized', { status: 401 });
+    // }
+
+    if (!session || !session.user?.id) {
+      // 開発中のみ仮ユーザーを挿入
+      session = { user: { id: 'dev-user-id' } };
     }
 
     const userMessage = getMostRecentUserMessage(messages);
@@ -98,13 +106,14 @@ export async function POST(request: Request) {
           experimental_transform: smoothStream({ chunking: 'word' }),
           experimental_generateMessageId: generateUUID,
           tools: {
-            getWeather,
-            createDocument: createDocument({ session, dataStream }),
-            updateDocument: updateDocument({ session, dataStream }),
-            requestSuggestions: requestSuggestions({
-              session,
-              dataStream,
-            }),
+            // APIで外部に取りに行くのでコメントアウト
+            // getWeather,
+            // createDocument: createDocument({ session, dataStream }),
+            // updateDocument: updateDocument({ session, dataStream }),
+            // requestSuggestions: requestSuggestions({
+            //   session,
+            //   dataStream,
+            // }),
           },
           onFinish: async ({ response }) => {
             if (session.user?.id) {
@@ -194,4 +203,11 @@ export async function DELETE(request: Request) {
       status: 500,
     });
   }
+}
+
+//追加部分
+import { NextResponse } from 'next/server';
+export async function GET() {
+  const id = generateUUID();
+  return NextResponse.json({ id });
 }

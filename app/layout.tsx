@@ -2,12 +2,13 @@ import { Toaster } from 'sonner';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
+import { SidebarProvider } from '@/components/ui/sidebar';
 
 import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://chat.vercel.ai'),
-  title: 'Next.js Chatbot Template',
+  title: 'カスタムチャットボット',
   description: 'Next.js chatbot template using the AI SDK.',
 };
 
@@ -81,5 +82,14 @@ export default async function RootLayout({
         </ThemeProvider>
       </body>
     </html>
+  );
+}
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <SidebarProvider>
+      {/* その他コンポーネント（SidebarInsetなど） */}
+      {children}
+    </SidebarProvider>
   );
 }

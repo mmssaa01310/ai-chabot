@@ -1,6 +1,12 @@
-import type { NextConfig } from 'next';
+// next.config.ts
+import createNextIntlPlugin from 'next-intl/plugin';
 
-const nextConfig: NextConfig = {
+const withNextIntl = createNextIntlPlugin({
+  // オプションがあればここに追加（必要に応じて）
+});
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   experimental: {
     ppr: true,
   },
@@ -13,4 +19,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

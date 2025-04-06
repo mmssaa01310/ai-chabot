@@ -1,0 +1,114 @@
+{
+  "header": {
+    "newChat": "新しいチャット",
+    "selectModel": "モデル選択",
+    "visibility": "公開範囲"
+  },
+  "sidebar": {
+    "title": "チャットボット",
+    "newChat": "新規チャット"
+  },
+  "auth": {
+    "signIn": "サインイン",
+    "signInDescription": "メールアドレスとパスワードでサインインしてください",
+    "signUp": "登録",
+    "signUpDescription": "メールアドレスとパスワードでアカウントを作成",
+    "noAccount": "アカウントをお持ちでない方は、",
+    "forFree": "無料で登録できます。",
+    "email": "メールアドレス",
+    "emailPlaceholder": "user@example.com",
+    "password": "パスワード",
+    "alreadyHaveAccount": "すでにアカウントをお持ちですか？",
+    "instead": "こちらからサインインしてください。",
+    "userExists": "アカウントは既に存在します！",
+    "invalidCredentials": "メールアドレスまたはパスワードが間違っています！",
+    "invalidData": "入力内容の検証に失敗しました！",
+    "failed": "アカウントの作成に失敗しました！",
+    "success": "アカウントを作成しました！"
+  },
+  "messageEditor": {
+    "cancel": "キャンセル",
+    "send": "送信",
+    "sending": "送信中..."
+  },
+  "chat": {
+    "title": "チャットタイトル",
+    "welcomeMessage": "ようこそ、チャットへ！"
+  },
+  "modelSelector": {
+    "title": "モデルを選択",
+    "placeholder": "モデルを選択...",
+    "chatModels": "チャットモデル",
+    "completionModels": "補完モデル",
+    "chat-model": {
+      "name": "チャットモデル",
+      "description": "会話に最適化されたモデルです"
+    },
+    "chat-model-reasoning": {
+      "name": "推論チャットモデル",
+      "description": "複雑な思考や推論に強いモデルです"
+    },
+    "gpt-3-5-turbo": {
+      "name": "GPT-3.5 Turbo",
+      "description": "高速かつコスト効率の高い OpenAI のモデル"
+    },
+    "gpt-4": {
+      "name": "GPT-4",
+      "description": "高精度な応答が可能な OpenAI の上位モデル"
+    },
+    "deepseek-chat": {
+      "name": "DeepSeek Chat",
+      "description": "推論に強い高性能なオープンソースモデル"
+    },
+    "claude-3-opus": {
+      "name": "Claude 3.5（Opus）",
+      "description": "Anthropic による高信頼・高性能なチャットモデル"
+    },
+    "amazon-nova": {
+      "name": "Amazon Titan Nova",
+      "description": "Amazon Bedrock プラットフォームの会話用モデル"
+    }
+  },
+  "visibilitySelector": {
+    "title": "公開範囲",
+    "placeholder": "公開範囲を選択...",
+    "private": {
+      "label": "非公開",
+      "description": "あなただけがこのチャットを閲覧できます"
+    },
+    "public": {
+      "label": "公開",
+      "description": "誰でもこのチャットを閲覧できます"
+    }
+  },
+  "overview": {
+    "title": "AI保全ChatBot EmMaです。",
+    "description": "過去の事例を元に保全業務の質問に対して、トラブルの対処方法についてお答えいたします。"
+  },
+  "sidebar": {
+    "show": "サイドバーを表示",
+    "hide": "サイドバーを隠す"
+  },
+  "suggested": {
+    "item_1": {
+      "title": "AI保全とは？",
+      "label": "その基本と活用方法",
+      "action": "AI保全とは何か？どのように活用できますか？"
+    },
+    "item_2": {
+      "title": "異常検知の仕組み",
+      "label": "どうやって動作する？",
+      "action": "AIによる異常検知はどのように動作しますか？"
+    },
+    "item_3": {
+      "title": "事例ベースの対応",
+      "label": "過去の事例から学ぶ",
+      "action": "過去の保全対応の事例を教えてください。"
+    },
+    "item_4": {
+      "title": "トラブル対応手順",
+      "label": "工場現場での対応",
+      "action": "工場でトラブルが発生したとき、どのように対応すればいいですか？"
+    }
+  }
+}
