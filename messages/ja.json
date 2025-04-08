@@ -38,6 +38,27 @@
     "save": "保存",
     "cancel": "キャンセル"
   },
+  "AnalysisModal": {
+    "title": "分析フォーム",
+    "description": "左のリストからプロンプト種別を選び、フィルターを設定して「プロンプトを生成」してください。",
+    "start": "開始日時",
+    "end": "終了日時",
+    "promptType": "プロンプト種別",
+    "summary": "サマリー",
+    "analysis": "トラブル対処方法",
+    "generate": "プロンプトを生成",
+    "department": "部門名",
+    "group": "グループ",
+    "line": "ライン",
+    "machine": "設備名",
+    "trouble": "トラブル名",
+    "all": "全て",
+    "unselected": "未指定",
+    "search": "{label}を検索",
+    "period": "期間",
+    "summarySuffix": "上記の、サマリーを教えて。",
+    "analysisSuffix": "について、問題の対処方法を教えて。"
+  },
   "messageEditor": {
     "cancel": "キャンセル",
     "send": "送信",
