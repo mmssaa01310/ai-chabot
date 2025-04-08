@@ -19,6 +19,7 @@ const lines = ['ライン1', 'ライン2'];
 const machines = ['成形機A', '組立機B'];
 const troubles = ['異音発生', '加熱異常'];
 
+
 type AnalysisModalProps = {
   open: boolean;
   onClose: () => void;
@@ -40,6 +41,33 @@ export function AnalysisModal({
   const [machine, setMachine] = useState('all');
   const [trouble, setTrouble] = useState('all');
   const [selectedType, setSelectedType] = useState<'summary' | 'analysis'>('summary');
+
+  // Elasticsearchから取得（api/elasticsearch/route.ts）
+  // const [departments, setDepartments] = useState<string[]>([]);
+  // const [groups, setGroups] = useState<string[]>([]);
+  // const [lines, setLines] = useState<string[]>([]);
+  // const [machines, setMachines] = useState<string[]>([]);
+  // const [troubles, setTroubles] = useState<string[]>([]);
+
+//   useEffect(() => {
+//     const fetchFilters = async () => {
+//       try {
+//         const res = await fetch('/api/elasticsearch');
+//         if (!res.ok) throw new Error('Failed to fetch filters');
+//         const data = await res.json();
+
+//         setDepartments(data.departments || []);
+//         setGroups(data.groups || []);
+//         setLines(data.lines || []);
+//         setMachines(data.machines || []);
+//         setTroubles(data.troubles || []);
+//       } catch (err) {
+//         console.error('API fetch error:', err);
+//       }
+//     };
+
+//     fetchFilters();
+//   }, []);
 
   const buildLabel = (label: string, value: string) => {
     if (!value) return `${label}：${t('unselected')}`;
@@ -141,7 +169,7 @@ export function AnalysisModal({
 
                 return (
                   <div key={key}>
-                    <label className="text-sm block mb-1">{t(key)}</label>
+                    {/* <label className="text-sm block mb-1">{t(key)}</label> */}
                     <CustomAutocomplete
                       label={t(key)}
                       placeholder={t('search', { label: t(key) })}
