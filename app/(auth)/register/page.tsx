@@ -11,8 +11,9 @@ import { register, type RegisterActionState } from '../actions';
 import { toast } from '@/components/toast';
 
 export default function Page() {
+  
   const router = useRouter();
-  const t = useTranslations('auth'); // 🌐 ルート全体を対象に取得
+  const t = useTranslations('auth');
 
   const [email, setEmail] = useState('');
   const [isSuccessful, setIsSuccessful] = useState(false);

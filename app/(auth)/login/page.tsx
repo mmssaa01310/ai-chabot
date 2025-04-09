@@ -13,7 +13,7 @@ import { login, type LoginActionState } from '../actions';
 
 export default function Page() {
   const router = useRouter();
-  const t = useTranslations('auth'); // ✅ "auth" 名前空間を指定
+  const t = useTranslations('auth'); 
 
   const [email, setEmail] = useState('');
   const [isSuccessful, setIsSuccessful] = useState(false);
