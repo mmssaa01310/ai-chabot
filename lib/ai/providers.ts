@@ -5,12 +5,16 @@ import {
 } from 'ai';
 import { deepseek } from '@ai-sdk/deepseek';
 import { isTestEnvironment } from '../constants';
+
+// test用のプロバイダーを作成
 import {
-  artifactModel,
-  chatModel,
-  reasoningModel,
-  titleModel,
+  artifactModel as artifactModelTest,
+  chatModel as chatModelTest,
+  reasoningModel as reasoningModelTest,
+  titleModel as titleModelTest,
 } from './models.test';
+
+import { bedrockAgent } from './bedrock-agent';
 
 // export const myProvider = isTestEnvironment
 //   ? customProvider({
@@ -31,46 +35,21 @@ import {
 //     });
 
 
-import { invokeBedrockAgent } from './bedrock-agent'; 
 export const myProvider = isTestEnvironment
   ? customProvider({
       languageModels: {
-        'chat-model': chatModel,
-        'chat-model-reasoning': reasoningModel,
-        'title-model': titleModel,
-        'artifact-model': artifactModel,
+        'chat-model': chatModelTest,
+        'chat-model-reasoning': reasoningModelTest,
+        'title-model': titleModelTest,
+        'artifact-model': artifactModelTest,
       },
     })
   : customProvider({
       languageModels: {
-        'chat-model': {
-          async call({ prompt }) {
-            const sessionId = crypto.randomUUID(); // 毎回新規セッションも可能
-            const result = await invokeBedrockAgent(prompt.text, sessionId);
-            return { text: result.completion };
-          },
-        },
-        'chat-model-reasoning': {
-          async call({ prompt }) {
-            const sessionId = crypto.randomUUID();
-            const result = await invokeBedrockAgent(prompt.text, sessionId);
-            return { text: result.completion };
-          },
-        },
-        'title-model': {
-          async call({ prompt }) {
-            const sessionId = crypto.randomUUID();
-            const result = await invokeBedrockAgent(prompt.text, sessionId);
-            return { text: result.completion };
-          },
-        },
-        'artifact-model': {
-          async call({ prompt }) {
-            const sessionId = crypto.randomUUID();
-            const result = await invokeBedrockAgent(prompt.text, sessionId);
-            return { text: result.completion };
-          },
-        },
+        'chat-model': bedrockAgent('chat'),
+        'chat-model-reasoning': bedrockAgent('reasoning'),
+        'title-model': bedrockAgent('title'),
+        'artifact-model': bedrockAgent('artifact'),
       },
-    });
+  });
   
