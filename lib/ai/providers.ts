@@ -1,12 +1,7 @@
-import {
-  customProvider,
-  extractReasoningMiddleware,
-  wrapLanguageModel,
-} from 'ai';
-import { deepseek } from '@ai-sdk/deepseek';
+import { customProvider } from 'ai';
 import { isTestEnvironment } from '../constants';
 
-// test用のプロバイダーを作成
+// テスト用のプロバイダーを作成
 import {
   artifactModel as artifactModelTest,
   chatModel as chatModelTest,
@@ -14,27 +9,22 @@ import {
   titleModel as titleModelTest,
 } from './models.test';
 
-import { bedrockAgent } from './bedrock-agent';
+// ◆createBedrockAgent をインポート
+import { createBedrockAgent } from './tools/create-bedrock-agent';
 
-// export const myProvider = isTestEnvironment
-//   ? customProvider({
-//       languageModels: {
-//         'chat-model': chatModel,
-//         'chat-model-reasoning': reasoningModel,
-//         'title-model': titleModel,
-//         'artifact-model': artifactModel,
-//       },
-//     })
-//   : customProvider({
-//       languageModels: {
-//         'chat-model': deepseek('deepseek-chat'),
-//         'chat-model-reasoning': deepseek('deepseek-reasoner'),
-//         'title-model': deepseek('deepseek-chat'),
-//         'artifact-model': deepseek('deepseek-chat'),
-//       },
-//     });
+// createBedrockAgentでベースを作成
+const bedrockAgentBase = createBedrockAgent({
+  agentId: process.env.BEDROCK_AGENT_ID!,
+  aliasId: process.env.BEDROCK_AGENT_ALIAS_ID!,
+  region: 'ap-northeast-1', // 必要に応じて
+});
 
+// bedrockAgent関数を定義し、modelIdを渡して languageModel を返す
+function bedrockAgent(modelId: string) {
+  return bedrockAgentBase.languageModel(modelId);
+}
 
+// provider本体
 export const myProvider = isTestEnvironment
   ? customProvider({
       languageModels: {
@@ -51,5 +41,4 @@ export const myProvider = isTestEnvironment
         'title-model': bedrockAgent('title'),
         'artifact-model': bedrockAgent('artifact'),
       },
-  });
-  
+    });
